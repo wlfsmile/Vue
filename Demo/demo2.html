@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue-demo2</title>
+	<script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+	<div id="example">
+		<p>message:"{{ message }}"</p>
+		<p>reversed message: "{{ reversedMessage() }}"</p>
+	</div>
+
+	<div id="demo">
+		{{ fullName }}
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#example',
+			data: {
+				message: 'hello'
+			},
+			methods: {
+				reversedMessage: function(){
+					return this.message.split('').reverse().join('');
+				}
+			}
+		})
+
+		console.log(vm.reversedMessage());
+		vm.message = 'hahhaha';
+		console.log(vm.reversedMessage());
+
+		var vm = new Vue({
+			el:'#demo',
+			data: {
+				firstName: 'Foo',
+				lastName: 'Bar',
+				fullName: 'Foo Bar'
+			},
+			watch: {
+				firstName: function(val){
+					this.fullName = val + ' ' + this.lastName
+				},
+				lastName: function(val){
+					this.fullName = val.firstName + ' ' + val;
+				}
+			}
+		})
+
+		/*var vm = new Vue({
+		  	el: '#demo',
+		  	data: {
+		    	firstName: 'Foo',
+		    	lastName: 'Bar'
+		  	},
+		  	computed: {
+		    	fullName: function () {
+		      		return this.firstName + ' ' + this.lastName
+		    	}
+		  	}
+		})*/
+	</script>
+</body>
+</html>
