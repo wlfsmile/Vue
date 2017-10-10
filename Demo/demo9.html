@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue-demo9</title>
+	<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
+	<script type="text/javascript" src="../vue.js"></script>
+	<style type="text/css">
+
+		.fade-enter-active, .fade-leave-active {
+  			transition: all 1s ease;
+		}
+		.fade-enter, .fade-leave-active /* .fade-leave-active in below version 2.1.8 */ {
+  			opacity: 0;
+		}
+		/*.content{
+			width: 100px;
+			height: 100px;
+			background-color: black;
+			opacity: 1;
+		}*/
+		.slide-fade-enter-active {
+		  transition: all .3s ease;
+		}
+		.slide-fade-leave-active {
+		  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+		}
+		.slide-fade-enter, .slide-fade-leave-to
+		/* .slide-fade-leave-active for below version 2.1.8 */ {
+		  transform: translateX(10px);
+		  opacity: 0;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<button v-on:click="ok = !ok">
+    		Toggle
+  		</button>
+		<transition name="slide-fade">
+			<!-- <p :key="ok">{{ ok }}</p> -->
+	    	<p class="content" v-if="ok">hello</p>
+	  	</transition>
+	</div>
+
+	<div id="example-3">
+	  <button @click="show = !show">
+	    Toggle render
+	  </button>
+	  <transition
+	    name="custom-classes-transition"
+	    enter-active-class="animated tada"
+	    leave-active-class="animated bounceOutRight"
+	  >
+	    <p v-if="show">hello</p>
+	  </transition>
+	</div>
+	
+	<script>
+		var vm = new Vue({
+			el: '#example-3',
+			data: {
+				ok: false,
+				show: false
+			}
+		})
+	</script>
+</body>
+</html>
